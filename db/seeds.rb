@@ -1,5 +1,11 @@
-User.create!(name: 'pupe', email: 'pupe@mail.com')
-User.create!(name: 'toto', email: 'toto@mail.com')
+User.create!(name: 'pupe', email: 'pupe@mail.com', password: 'password')
+User.create!(name: 'toto', email: 'toto@mail.com', password: 'password')
+
+50.times do
+  User.create!(name: Faker::Name.name,
+               email: Faker::Internet.free_email,
+               password: 'password')
+end
 
 1.upto(2) do |user|
   10.times do
@@ -13,6 +19,8 @@ end
                                 content: Faker::Lorem.paragraph)
 end
 
-50.times do
-  User.create!(name: Faker::Name.new, email: Faker::Internet.free_email)
+10.times do |n|
+  User.find(1).initiated_friendships.create!(friend_id: n + 2)
 end
+
+User.find(2).requests_sent.create!(to_id: 3)
