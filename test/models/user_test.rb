@@ -20,12 +20,15 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'friendships should go both ways' do
-    assert @pupe.friends_with?(@toti.id)
-    assert @toti.friends_with?(@pupe.id)
+    assert @pupe.friends_with?(@toti)
+    assert @toti.friends_with?(@pupe)
   end
 
-  test 'should be able to see request sent and pending' do
+  test 'should display request sent' do
     assert_equal @toti.requests_sent.first.to, @lepu
+  end
+
+  test 'should display request pending' do
     assert_equal @lepu.requests_received.first.from, @toti
   end
 end
