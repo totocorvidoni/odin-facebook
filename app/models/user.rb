@@ -3,7 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  validates :name, presence: true
+  validates :name, presence: true, length: { maximum: 50 }
+  
   has_many :posts, foreign_key: 'author_id'
   has_many :comments, foreign_key: 'author_id'
   has_many :initiated_friendships, class_name: 'Friendship',
@@ -22,7 +23,8 @@ class User < ApplicationRecord
     friends_initiated | friends_received
   end
 
-  def friends_with?(id)
-    friends.include?(User.find(id))
+  # Returns true if the user is friends with provided user.
+  def friends_with?(user)
+    friends.include?(user)
   end
 end
