@@ -3,7 +3,7 @@
     <%= user.name %> - <%= user.email %> <br>
     <% unless current_user.friends_with?(user) %>
       <%= link_to 'send friend request',
-          friendship_requests_path(request: { from: current_user, to: user }),
+          friendship_requests_path(request: { from_id: current_user, to_id: user }),
                                     method: 'post' %>
     <% end %>
   </li>
