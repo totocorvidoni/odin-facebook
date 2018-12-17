@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   validates :name, presence: true, length: { maximum: 50 }
-  
+
   has_many :posts, foreign_key: 'author_id'
   has_many :comments, foreign_key: 'author_id'
   has_many :initiated_friendships, class_name: 'Friendship',
@@ -26,5 +26,9 @@ class User < ApplicationRecord
   # Returns true if the user is friends with provided user.
   def friends_with?(user)
     friends.include?(user)
+  end
+
+  def pending_request?(user)
+    requests_sent.where(to: user).any?
   end
 end
