@@ -1,0 +1,13 @@
+<nav>
+  <p>
+    <% if user_signed_in? %>
+      Logged in as: <strong><%= current_user.name %></strong>.
+      <%= link_to 'My profile', current_user %> |
+      <%= link_to 'Edit account', edit_user_registration_path %> |
+      <%= link_to "Logout", destroy_user_session_path, method: :delete %></p>
+    <% else %>
+      <%= link_to "Sign up", new_user_registration_path %> |
+      <%= link_to "Login", new_user_session_path %>
+    <% end %>
+  </p>
+</nav>
