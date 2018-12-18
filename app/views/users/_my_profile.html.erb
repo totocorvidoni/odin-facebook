@@ -1,1 +1,12 @@
 <h1>My Profile</h1>
+
+<h2>People who want to be your friend</h2>
+<ul>
+  <% @user.requests_received.each do |request| %>
+    <li><%= link_to request.from.name, user_path(request.from) %> --
+      <%= link_to 'Accept',
+          friendships_path(friendship: { user_id: request.from, friend_id: request.to }),
+                           method: 'post' %> request</li>
+  <% end %>  
+</ul>
+
