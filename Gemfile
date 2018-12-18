@@ -56,6 +56,8 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   # Faker to provide filler text
   gem 'faker', '~> 1.9.1'
+  # Database Browser
+  gem 'rails_db', '2.0.4'
 end
 
 group :test do
