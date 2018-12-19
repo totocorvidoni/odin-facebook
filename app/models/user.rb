@@ -7,6 +7,9 @@ class User < ApplicationRecord
 
   has_many :posts, foreign_key: 'author_id'
   has_many :comments, foreign_key: 'author_id'
+  has_many :commented_posts, through: :comments, source: :post
+  has_many :likes
+  has_many :liked_posts, through: :likes, source: :post
   has_many :initiated_friendships, class_name: 'Friendship',
                                    foreign_key: 'user_id'
   has_many :received_friendships,  class_name: 'Friendship',

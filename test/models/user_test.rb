@@ -19,6 +19,18 @@ class UserTest < ActiveSupport::TestCase
     assert_equal @pupe.comments.first, comments(:two)
   end
 
+  test 'commented posts' do
+    assert_equal @toti.commented_posts.first, posts(:one)
+  end
+
+  test 'likes association' do
+    assert_equal @lepu.likes.count, 2
+  end
+
+  test 'should display liked posts' do
+    assert_equal @lepu.liked_posts, posts(:one, :two)
+  end
+
   test 'friendships should go both ways' do
     assert @pupe.friends_with?(@toti)
     assert @toti.friends_with?(@pupe)
