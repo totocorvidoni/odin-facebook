@@ -31,7 +31,18 @@ class User < ApplicationRecord
     friends.include?(user)
   end
 
+  # Returns true if there is a friend request waiting for aproval of the given user
   def pending_request?(user)
     requests_sent.where(to: user).any?
+  end
+
+  # Returns true if User likes given post
+  def likes?(post)
+    liked_posts.where(id: post).any?
+  end
+
+  # Returns the Like ID for user's like of the given post
+  def like_id(post)
+    likes.find_by(post: post).id
   end
 end

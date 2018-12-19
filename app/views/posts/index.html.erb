@@ -1,4 +1,9 @@
-<% @posts.each do |p| %>
-  <h3><%= p.title %></h3>
-  <p><%= p.content %></p>
+<% @posts.each do |post| %>
+  <h3><%= post.title %></h3>
+  <p><%= post.content %></p>
+  <% if current_user.likes?(post) %>
+    <%= link_to 'unlike', like_path(current_user.like_id(post)), method: 'delete' %>
+  <% else %>
+    <%= link_to 'like', likes_path(post_id: post), method: 'post' %>
+  <% end %>
 <% end %>
