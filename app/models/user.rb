@@ -40,9 +40,4 @@ class User < ApplicationRecord
   def likes?(post)
     liked_posts.where(id: post).any?
   end
-
-  # Returns the Like ID for user's like of the given post
-  def like_id(post)
-    likes.find_by(post: post).id
-  end
 end

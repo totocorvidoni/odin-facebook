@@ -6,9 +6,8 @@
     <% elsif current_user.pending_request?(user) %>
       / Evaluating your request
     <% else %>
-      / <%= link_to 'Send friend request',
-          friendship_requests_path(request: { from_id: current_user, to_id: user }),
-                                    method: 'post' %>
+      / <%= button_to 'Send friend request',
+          friendship_requests_path(request: { from_id: current_user, to_id: user }) %>
     <% end %>
   </li>
 <% end %>

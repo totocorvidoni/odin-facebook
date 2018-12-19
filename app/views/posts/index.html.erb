@@ -2,8 +2,19 @@
   <h3><%= post.title %></h3>
   <p><%= post.content %></p>
   <% if current_user.likes?(post) %>
-    <%= link_to 'unlike', like_path(current_user.like_id(post)), method: 'delete' %>
+    <%= button_to 'unlike', like_path(post.like_id(current_user)), method: 'delete' %>
   <% else %>
-    <%= link_to 'like', likes_path(post_id: post), method: 'post' %>
+    <%= button_to 'like', likes_path(post_id: post)%>
   <% end %>
+  <ul>
+    <% post.comments.each do |comment| %>
+      <li>
+        <%= link_to comment.author.name, user_path(comment.author) %> wrote: <br>
+        <%= comment.content %> <br>
+        on <em><%= comment.created_at.strftime('%c') %></em>
+      </li>
+    <% end %>        
+  </ul>
+  <%= render partial: 'comments/form', locals: { author_id: current_user.id,
+                                                 post_id: post.id } %>
 <% end %>
