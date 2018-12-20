@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     comment = Comment.new(comment_params)
     if comment.save
       flash[:success] = 'Comment Created!'
-      redirect_to posts_path
+      redirect_back(fallback_location: posts_path) 
     end
   end
 

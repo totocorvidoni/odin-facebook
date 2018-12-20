@@ -1,5 +1,10 @@
+<%= gravatar_for(@user) %>
 <% if current_user == @user %>
+  <h1>My profile</h1>
   <%= render 'my_profile' %>
 <% else %>
-  <%= render 'user_profile' %>  
+  <h1><%= @user.name %>'s profile</h1>
+  <%#= render 'user_profile' %> 
 <% end %>
+<h2>Posts</h2>
+<%= render @user.posts.new_first %>

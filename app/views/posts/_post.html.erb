@@ -1,0 +1,23 @@
+<h3><%= post.title %></h3>
+
+<% unless post.author.id == params[:id].to_i %>
+  <p><em>by: <%= gravatar_for(post.author, size: 20) %> <%=  post.author.name %></em></p>
+<% end %>
+<p><%= post.content %></p>
+<p>Likes: <%= post.likes.count %></p>
+<% if current_user.likes?(post) %>
+  <%= button_to 'unlike', like_path(post.like_id(current_user)), method: 'delete' %>
+<% else %>
+  <%= button_to 'like', likes_path(post_id: post)%>
+<% end %>
+<ul>
+  <% post.comments.each do |comment| %>
+    <li>
+      <%= link_to comment.author.name, user_path(comment.author) %> wrote: <br>
+      <%= comment.content %> <br>
+      on <em><%= comment.created_at.strftime('%c') %></em>
+    </li>
+  <% end %>
+</ul>
+<%= render partial: 'comments/form', locals: { author_id: current_user.id,
+                                               post_id: post.id } %>

@@ -21,9 +21,14 @@ class User < ApplicationRecord
   has_many :requests_received, class_name: 'FriendshipRequest',
                                foreign_key: 'to_id'
 
-  # Return all friendsids joining the two types using |(Set Union)
+  # Return all friends joining the two types using |(Set Union)
   def friends
-    friends_initiated.ids | friends_received.ids
+    friends_initiated | friends_received
+  end
+
+  # Return the ids of all user's friends
+  def friend_ids
+    friends.map(&:id)
   end
 
   # Returns true if the user is friends with provided user.
@@ -32,7 +37,7 @@ class User < ApplicationRecord
   end
 
   def allowed_feeds
-    friends << self.id
+    friend_ids << self.id
   end
 
   # Returns true if there is a friend request waiting for aproval of the given user

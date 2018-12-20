@@ -1,13 +1,16 @@
 <% unless current_user == user %>  
   <li>
-    <%= user.name %> - <%= user.email %> 
-    <% if current_user.friends_with?(user) %>
-      / Friend
-    <% elsif current_user.pending_request?(user) %>
-      / Evaluating your request
-    <% else %>
-      / <%= button_to 'Send friend request',
-          friendship_requests_path(request: { from_id: current_user, to_id: user }) %>
-    <% end %>
+    <%= gravatar_for(user, size: 40) %>
+    <%= link_to user.name, user %> - <%= user.email %> 
+    <div>
+      <% if current_user.friends_with?(user) %>
+        Friend
+      <% elsif current_user.pending_request?(user) %>
+        Evaluating your request
+      <% else %>
+        <%= button_to 'Send friend request',
+            friendship_requests_path(request: { from_id: current_user, to_id: user }) %>
+      <% end %>
+    </div>
   </li>
 <% end %>

@@ -15,7 +15,7 @@ class PostsController < ApplicationController
     post = Post.new(post_params)
     if post.save
       flash[:notice] = 'Post created!'
-      redirect_to '/posts'
+      redirect_to posts_path
     end
   end
 
