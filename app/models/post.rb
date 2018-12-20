@@ -8,6 +8,8 @@ class Post < ApplicationRecord
   validates :title, presence: true
   validates :content, presence: true
 
+  scope :new_first,  -> { order(created_at: :desc) }
+
   # Returns the Like ID belonging to a given user
   def like_id(user)
     likes.find_by(user: user).id

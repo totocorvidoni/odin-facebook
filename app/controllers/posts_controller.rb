@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.all.order(created_at: :desc)
+    @posts = Post.where(author_id: current_user.allowed_feeds).new_first
   end
 
   def show
