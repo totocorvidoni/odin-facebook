@@ -1,5 +1,13 @@
 nav {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   background: #e2fcff;
+  ul {
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
+    li {
+      padding: 0 5px;
+    }
+  }
 }

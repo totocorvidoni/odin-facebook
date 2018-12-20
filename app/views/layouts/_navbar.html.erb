@@ -1,14 +1,19 @@
 <nav>
-  <p>
+ <ul>
+   <li><%= link_to 'Users', users_path %></li>
+   <li><%= link_to 'Posts', posts_path %></li>
+   <li><%= link_to 'New Post', new_post_path %></li>
+ </ul>
+  <ul>
     <% if user_signed_in? %>
-      Friend Requests: <%= link_to current_user.requests_received.count, current_user %>
-      Logged in as: <strong><%= current_user.name %></strong>.
-      <%= link_to 'My profile', current_user %> |
-      <%= link_to 'Edit account', edit_user_registration_path %> |
-      <%= link_to "Logout", destroy_user_session_path, method: :delete %></p>
+      <li>Notifications: <%= link_to current_user.requests_received.count, current_user %></li>
+      <li>Logged in as: <strong><%= current_user.name %></strong>.</li>
+      <li><%= link_to 'My profile', current_user %></li>
+      <li><%= link_to 'Edit account', edit_user_registration_path %></li>
+      <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
     <% else %>
-      <%= link_to "Sign up", new_user_registration_path %> |
-      <%= link_to "Login", new_user_session_path %>
+      <li><%= link_to "Sign up", new_user_registration_path %></li>
+      <li><%= link_to "Login", new_user_session_path %></li>
     <% end %>
-  </p>
+  </ul>
 </nav>
