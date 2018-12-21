@@ -58,6 +58,8 @@ group :development do
   gem 'faker', '~> 1.9.1'
   # Database Browser
   gem 'rails_db', '2.0.4'
+
+  gem 'letter_opener'
 end
 
 group :test do
